@@ -1,0 +1,59 @@
+<html>
+<head>
+	<title>reversi</title>
+	<script type="text/javascript" src="jquery.js"></script>
+	<style type="text/css">
+	.white {
+		background-color: #fff;
+	}
+	.black {
+		background-color: #000;
+	}
+	.enable {
+		background-color: #ddd;
+	}
+	.enable:hover {
+		box-shadow: -2px -2px 2px #777;
+	}
+	.disable {
+		background-color: #aaa;
+	}
+	</style>
+</head>
+<body style="margin: 0;">
+	<div id="box" style="position:absolute;"></div>
+	<script type="text/javascript">
+		h=Math.floor(window.innerHeight/8);
+		w=Math.floor(window.innerWidth/8);
+		shorter=(w>h)?h:w;
+		$('#box').css("height", shorter*8+'px');
+		$('#box').css("width", shorter*8+'px');
+		$('#box').css("left", (window.innerWidth-shorter*8)/2+'px');
+		var box = new Array();
+		for (i=1;i<=8;i++) {
+			box[i] = new Array();
+		}
+		for (i=1;i<=8;i++) {
+			for (j=1;j<=8;j++) {
+				box[i][j]=''
+			}
+		}
+		$.post('drawbox.php', {
+			width:shorter
+		}, function(data){
+			$('#box').append(data);
+		})
+		$.post('action.php', {
+			action:'init',
+			status:box
+		},function(data){
+			data=eval("("+data+")");
+			for (i=1;i<=8;i++) {
+				for (j=1;j<=8;j++) {
+					$('#'+i+j).addClass(data[i][j]);
+				}
+			}
+		})
+	</script>
+</body>
+</html>
