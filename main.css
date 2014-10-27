@@ -1,0 +1,18 @@
+rect:hover {
+	box-shadow: -2px -2px 2px #777777;
+}
+.white {
+	background-color: #fff;
+}
+.black {
+	background-color: #000;
+}
+.enable {
+	background-color: #ddd;
+}
+.enable:hover {
+	box-shadow: -2px -2px 2px #777;
+}
+.disable {
+	background-color: #aaa;
+}
