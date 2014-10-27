@@ -56,11 +56,14 @@ function check_left(pos){
 	}
 }
 function check_right(pos){
+	if (pos==26) {
+		alert(pos)
+	}
 	if ((pos%8==7)&&(chessboard[pos]!='0')) {
 		return false;
 	}
 	find=pos+1;
-	limit=8*Math.floor(1+pos/8)-1;
+	limit=Math.floor(1+pos/8)*8-1;
 	while ((find<=limit)&&(chessboard[find]=='1')) {
 		find+=1;
 	}
@@ -174,19 +177,16 @@ $(document).ready(function(){
 				})
 				.on({
 					mouseover: function(){
-						d3.select(this)
-							.attr("fill", function(){
-								if (check_able(i*8+j)) {
-									return "#777777";
-								}
-							});
+						if (check_able(d3.select(this).attr("id"))) {
+							d3.select(this).attr("fill", "#777777");
+						}
 					},
 					mouseout: function(){
 						d3.select(this)
 							.attr("fill", function(){
-								if (chessboard[i*8+j]=='1'){
+								if (chessboard[d3.select(this).attr("id")]=='1'){
 									return "#FFFFFF";
-								} else if (chessboard[i*8+j]=='2'){
+								} else if (chessboard[d3.select(this).attr("id")]=='2'){
 									return "#000000";
 								} else {
 									return "#DDDDDD";
