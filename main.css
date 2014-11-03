@@ -1,3 +1,6 @@
+body {
+	background-color: #123456;
+}
 rect:hover {
 	box-shadow: -2px -2px 2px #777777;
 }
